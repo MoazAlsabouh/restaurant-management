@@ -18,6 +18,7 @@ frontend/app/dist-ssr/
 
 # Env
 frontend/app/.env.production
+frontend/app/.env.development
 
 # Editor settings
 .vscode/*
