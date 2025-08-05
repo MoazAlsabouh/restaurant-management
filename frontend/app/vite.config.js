@@ -7,6 +7,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
 
   return {
+    base: '/restaurant-management/',  // أضف هذا السطر لضبط قاعدة المسارات
     plugins: [react()],
     server: {
       proxy: {
