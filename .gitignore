@@ -9,15 +9,15 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # Dependencies
-frontend/node_modules/
+frontend/app/node_modules/
 
 # Build output
-frontend/dist/
-frontend/dist-ssr/
+frontend/app/dist/
+frontend/app/dist-ssr/
 *.local
 
 # Env
-frontend/.env
+frontend/app/.env.production
 
 # Editor settings
 .vscode/*
