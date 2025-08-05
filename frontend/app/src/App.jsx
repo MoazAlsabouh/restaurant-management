@@ -18,7 +18,9 @@ function App() {
     if (redirectPath) {
       sessionStorage.removeItem('redirect');
       // قم بإزالة المسار الأساسي قبل التوجيه
-      const path = redirectPath.replace('/restaurant-management', '');
+      const path = redirectPath.startsWith('/restaurant-management')
+        ? redirectPath.replace('/restaurant-management', '')
+        : redirectPath;
       navigate(path, { replace: true });
     }
   }, [navigate]);
