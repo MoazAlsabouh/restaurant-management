@@ -54,8 +54,8 @@ def register():
 
     send_email_verification_code(email, verification_code)
 
-    token = generate_token(user)
-    send_activation_link(user.email, token)
+    # token = generate_token(user)
+    # send_activation_link(user.email, token)
 
     return jsonify({"success": True, "message": "تم التسجيل بنجاح. تحقق من بريدك الإلكتروني."}), 201
 
