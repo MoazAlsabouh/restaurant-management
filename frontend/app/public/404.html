@@ -1,13 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8" />
     <title>Redirecting...</title>
     <script>
-      // دمج كل عناصر URL (المسار + بارامترات + هاش) عند إعادة التوجيه
-      const fullPath = location.pathname + location.search + location.hash;
-      sessionStorage.setItem('redirect', fullPath);
-      location.replace('/restaurant-management/');
+      // إذا كانت عملية التوجيه قد حصلت قبل أقل من 2 ثانية، لا نكررها
+      const lastRedirect = sessionStorage.getItem('last_redirect');
+      const now = Date.now();
+
+      if (!lastRedirect || now - parseInt(lastRedirect) > 2000) {
+        const fullPath = location.pathname + location.search + location.hash;
+        sessionStorage.setItem('redirect', fullPath);
+        sessionStorage.setItem('last_redirect', now.toString());
+        location.replace('/restaurant-management/');
+      } else {
+        document.write('🔁 تم محاولة التوجيه أكثر من مرة. أوقفنا الحلقة لتفادي المشكلة.');
+      }
     </script>
   </head>
   <body>
