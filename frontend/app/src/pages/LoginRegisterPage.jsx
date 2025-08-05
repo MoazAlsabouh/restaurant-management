@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import useApi from '../hooks/useApi';
 import { useNotification } from '../context/NotificationContext';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
+
 const SpinnerIcon = () => ( <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"> <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle> <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path> </svg> );
 const GoogleIcon = () => ( <svg className="w-5 h-5" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"> <path fill="currentColor" d="M488 261.8C488 403.3 381.5 512 244 512 109.8 512 0 402.2 0 256S109.8 0 244 0c73.2 0 136 29.3 182.3 75.3l-63.6 62.1C337.3 114.6 295.6 96 244 96c-88.6 0-160.2 71.6-160.2 160s71.6 160 160.2 160c92.8 0 140.3-68.8 143.9-105.4H244v-75.5h243.1c1.6 10.3 2.9 20.9 2.9 31.8z"></path> </svg> );
 const FacebookIcon = () => ( <svg className="w-5 h-5" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"> <path fill="currentColor" d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"></path> </svg> );
@@ -87,7 +89,7 @@ export default function LoginRegisterPage() {
     };
 
     const handleSocialLogin = (provider) => {
-        window.location.href = `/api/v1/auth/login/${provider}`;
+        window.location.href = `${API_BASE_URL}/api/v1/auth/login/${provider}`;
     };
 
     const renderForm = () => {
