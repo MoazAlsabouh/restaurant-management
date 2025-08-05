@@ -1,6 +1,7 @@
 import jwt
 from datetime import datetime, timedelta
 from flask import current_app
+from app.models.user import User
 import os
 from dotenv import load_dotenv
 import smtplib
@@ -23,21 +24,43 @@ def generate_token(user):
         "user_id": user.id,
         "email": user.email,
         "role": user.role,
-        "exp": datetime.utcnow() + timedelta(hours=24)
+        "exp": datetime.utcnow() + timedelta(days=30),
+        "iat": datetime.utcnow(),  # وقت إنشاء التوكن
+        "role_updated_at": int(user.role_updated_at.timestamp()) if user.role_updated_at else 0
     }
     secret = get_jwt_secret_key()
     token = jwt.encode(payload, secret, algorithm='HS256')
     return token
 
+from flask import abort
+
 def decode_token(token):
     secret = get_jwt_secret_key()
     try:
         payload = jwt.decode(token, secret, algorithms=['HS256'])
+
+        user_id = payload.get('user_id')
+        if not user_id:
+            abort(401, description="Invalid token payload: missing user_id")
+
+        user = User.query.get(user_id)
+        if not user:
+            abort(401, description="User not found")
+
+        role_updated_at_ts = int(user.role_updated_at.timestamp()) if user.role_updated_at else 0
+        token_iat = payload.get('iat', 0)
+
+        if token_iat < role_updated_at_ts:
+            abort(401, description="Role has been updated. Please login again.")
+
         return payload
+
     except jwt.ExpiredSignatureError:
-        raise Exception("Token has expired")
+        abort(401, description="Token has expired")
     except jwt.InvalidTokenError:
-        raise Exception("Invalid token")
+        abort(401, description="Invalid token")
+
+
 
 def generate_activation_token(user_id, expires_in=3600):
     payload = {

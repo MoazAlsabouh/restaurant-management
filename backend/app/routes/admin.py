@@ -3,6 +3,7 @@ from flask import Blueprint, jsonify, request
 from app.models.user import User
 from app.auth.auth import requires_auth
 from app import db
+from datetime import datetime
 
 admin_bp = Blueprint('admin', __name__)
 
@@ -90,6 +91,7 @@ def update_user_role(payload, user_id):
 
     old_role = user.role
     user.role = new_role
+    user.role_updated_at = datetime.utcnow()
     db.session.commit()
 
     return jsonify({

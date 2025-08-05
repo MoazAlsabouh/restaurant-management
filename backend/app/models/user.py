@@ -23,6 +23,8 @@ class User(db.Model):
     # تواريخ الإنشاء والتحديث
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    role_updated_at = db.Column(db.DateTime, nullable=True)
+
 
     # دوال المساعدة لتعيين والتحقق من كلمة المرور
     def set_password(self, password):
