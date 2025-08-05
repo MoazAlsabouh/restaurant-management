@@ -4,6 +4,7 @@ from .food_category import food_category_bp
 from .auth import auth_bp
 from .admin import admin_bp
 from .profile import profile_bp
+from .migrate import migrate_bp
 
 
 def register_routes(app):
@@ -12,3 +13,4 @@ def register_routes(app):
     app.register_blueprint(auth_bp, url_prefix='/api/v1/auth')
     app.register_blueprint(admin_bp, url_prefix='/api/v1/admin')
     app.register_blueprint(profile_bp, url_prefix='/api/v1/profile')
+    app.register_blueprint(migrate_bp, url_prefix='/api/v1/migrate')
