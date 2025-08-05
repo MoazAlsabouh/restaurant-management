@@ -1,14 +1,15 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/restaurant-management/logo.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Moaz Restaurant</title>
-    <script type="module" crossorigin src="/restaurant-management/assets/index-BJOJlJ4q.js"></script>
-    <link rel="stylesheet" crossorigin href="/restaurant-management/assets/index-BKcWoOx0.css">
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script>
+      // دمج كل عناصر URL (المسار + بارامترات + هاش) عند إعادة التوجيه
+      const fullPath = location.pathname + location.search + location.hash;
+      sessionStorage.setItem('redirect', fullPath);
+      location.replace('/restaurant-management/');
+    </script>
   </head>
   <body>
-    <div id="root"></div>
   </body>
 </html>
