@@ -3,13 +3,28 @@
   <head>
     <meta charset="utf-8">
     <title>Redirecting...</title>
-    <script type="text/javascript">
-      // يحفظ المسار الذي حاول المستخدم الوصول إليه في sessionStorage
-      sessionStorage.redirect = location.pathname;
+    <script>
+      // دمج كل عناصر URL (المسار + بارامترات + هاش) عند إعادة التوجيه
+      const fullPath = location.pathname + location.search + location.hash;
+      sessionStorage.setItem('redirect', fullPath);
+      location.replace('/restaurant-management/');
     </script>
-    <!-- يقوم بإعادة التوجيه إلى الصفحة الرئيسية للتطبيق -->
-    <meta http-equiv="refresh" content="0;URL='/restaurant-management/'"></meta>
   </head>
   <body>
   </body>
 </html>
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script type="text/javascript">
+      // يحفظ المسار الذي حاول المستخدم الوصول إليه في sessionStorage
+      sessionStorage.redirect = location.pathname;
+    </script> -->
+    <!-- يقوم بإعادة التوجيه إلى الصفحة الرئيسية للتطبيق -->
+    <!-- <meta http-equiv="refresh" content="0;URL='/restaurant-management/'"></meta>
+  </head>
+  <body>
+  </body>
+</html> -->
