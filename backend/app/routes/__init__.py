@@ -13,4 +13,4 @@ def register_routes(app):
     app.register_blueprint(auth_bp, url_prefix='/api/v1/auth')
     app.register_blueprint(admin_bp, url_prefix='/api/v1/admin')
     app.register_blueprint(profile_bp, url_prefix='/api/v1/profile')
-    app.register_blueprint(migrate_bp, url_prefix='/api/v1/migrate')
+    # app.register_blueprint(migrate_bp, url_prefix='/api/v1/migrate')
