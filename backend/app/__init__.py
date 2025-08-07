@@ -12,10 +12,12 @@ import os
 
 migrate = Migrate()
 
+load_dotenv()
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object('app.config.Config')
-    app.secret_key = os.getenv("SECRET_KEY", "fallback-secret")  # الأفضل تأخذها من .env    load_dotenv()
+    app.secret_key = os.getenv("SECRET_KEY", "fallback-secret")  # الأفضل تأخذها من .env
 
     db.init_app(app)
     migrate.init_app(app, db)
